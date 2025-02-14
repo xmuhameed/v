@@ -15,8 +15,8 @@ export default function Page() {
   };
 
   const handleNoClick = () => {
-    setNoCount(noCount + 1);
     playSound(failSound);
+    setNoCount(noCount + 1);
   };
 
   const getNoButtonText = () => {
