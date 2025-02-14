@@ -8,10 +8,9 @@ export default function Page() {
   const [yesPressed, setYesPressed] = useState(false);
   const yesButtonSize = noCount * 20 + 16;
 
-  const playSound = (src: string, onended?: () => void) => {
+  const playSound = (src: string) => {
     const sound = new Audio(src);
     sound.play();
-    sound.onended = onended || (() => {});
   };
 
   const handleNoClick = () => {
