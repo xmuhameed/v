@@ -1,13 +1,22 @@
 "use client";
 import { useState } from "react";
+import successSound from "./assets/success.mp3";
+import failSound from "./assets/error-1.mp3";
 
 export default function Page() {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
   const yesButtonSize = noCount * 20 + 16;
 
+  const playSound = (src: string, onended?: () => void) => {
+    const sound = new Audio(src);
+    sound.play();
+    sound.onended = onended || (() => {});
+  };
+
   const handleNoClick = () => {
     setNoCount(noCount + 1);
+    playSound(failSound);
   };
 
   const getNoButtonText = () => {
@@ -51,7 +60,10 @@ export default function Page() {
             <button
               className={`mr-4 rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700`}
               style={{ fontSize: yesButtonSize }}
-              onClick={() => setYesPressed(true)}
+              onClick={() => {
+                setYesPressed(true)
+                playSound(successSound);
+              }}
             >
               Yes
             </button>
